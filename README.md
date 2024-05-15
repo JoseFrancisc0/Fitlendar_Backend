@@ -1,18 +1,17 @@
 # Fitlendar_Backend
 
-# Roadmap
+## Roadmap
 
 API: Ejercicios, Horarios, Metas
 
-## API_Ejercicios
+### API_Ejercicios
 
 - Comunica con la db ejercicios
 - Fetchea la data de cada ejercicio q tengamos en la app
 - Nuestra app deberia leer lista de ejercicios get_exercise_list()
 - Deberia tambien un add_custom_exercise(), va a local
-- verify_exercise(), counter
 
-## API Horarios
+### API Horarios
 
 - Fecha + Hora + Ejercicio
 - Deberia comunicar la app con Google Calendar (si es q esta linkeado)
@@ -20,7 +19,16 @@ API: Ejercicios, Horarios, Metas
 - Si no esta linkeado, deberia guardarse en local (de alguna forma)
 - Queda buscar como identificar nuestros eventos
 
-## Metas
+- Local: guardar_evento_local()
+- Google: mandar_google() de primeras, despues escribimos eventos en Google Calendar
 
-- Deberia estar linkeado con el perfil
-- Basado en verify_exercise()
+### Metas
+
+- Revisa Horarios con (completed: True)
+- Un usuario tiene su lista de metas
+- Usa datos de perfil, con su horario
+- Entonces se escribe a perfil
+- Datos de usuario lo manejamos con Google
+- Si no esta linkeado, esta guardado en local
+- Metas --> datos de usario.
+*** Metas no es API
