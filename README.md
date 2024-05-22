@@ -32,3 +32,12 @@ API: Ejercicios, Horarios, Metas
 - Si no esta linkeado, esta guardado en local
 - Metas --> datos de usario.
 *** Metas no es API
+
+## DONE
+- Plantilla de API_ejercicios usando flask
+
+## TODO
+- Convertir metodos a funciones lambda
+- Unir las funciones bajo APIGateway
+- Crear la base de datos (!!!)
+- Testing (?)
