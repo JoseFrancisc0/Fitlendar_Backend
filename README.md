@@ -35,9 +35,10 @@ API: Ejercicios, Horarios, Metas
 
 ## DONE
 - Plantilla de API_ejercicios usando flask
+- Base de datos con DynamoDB
 
 ## TODO
+- Acomodar la API_ejercicios de SQL a NoSQL
 - Convertir metodos a funciones lambda
 - Unir las funciones bajo APIGateway
-- Crear la base de datos (!!!)
 - Testing (?)
