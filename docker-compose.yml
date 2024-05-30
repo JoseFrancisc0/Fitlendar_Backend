@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+  ejercicios-api:
+    image: josefrancisc0/fitlendar_ejercicios-api:v1
+    ports:
+      - 8001:8001
+  users-api:
+    image: josefrancisc0/fitlendar_users-api:v1
+    ports:
+      - 8002:8002
