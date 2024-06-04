@@ -128,4 +128,4 @@ def delete_ejercicio(id):
     
 # Run
 if __name__ == '__main__':
-    ejercicios_api.run(host = '0.0.0.0', port = 8000, debug = True)
+    ejercicios_api.run(host = '0.0.0.0', port = 8001, debug = True)
