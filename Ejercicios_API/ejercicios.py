@@ -54,7 +54,7 @@ def create_ejercicio():
     db.session.add(ejercicio)
     db.session.commit()
     
-    return jsonify({'message': 'Car created successfully'}), 200
+    return jsonify({'message': 'Ejercicio created successfully'}), 200
 
 # READ (all) API Endpoint
 @ejercicios_api.route('/ejercicios', methods = ['GET'])
