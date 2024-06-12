@@ -13,4 +13,4 @@ API: Ejercicios, Users
 - API de users
 
 ## TODO
-- Mandar las updates de users api a docker
+- DONE
