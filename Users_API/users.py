@@ -35,7 +35,7 @@ def internal_server_error(error):
     return jsonify({'error': 'Internal server error.'}), 500
 
 # Register User
-@users_api.route('/users', methods = ['POST'])
+@users_api.route('/users/register', methods = ['POST'])
 def register_user():
     data = request.get_json()
 
@@ -45,6 +45,9 @@ def register_user():
     email = data['email']
     password = data['password']
 
+    if User.query.filter_by(email=email).first():
+        return jsonify({'error': 'Email already registered'}), 400
+    
     hashed_password = generate_password_hash(password, method='sha256')
 
     new_user = User(email=email, password=hashed_password)
@@ -55,7 +58,7 @@ def register_user():
     return jsonify({'message: User added successfully'}), 200
 
 # Login User
-@users_api.route('/users', methods = ['POST', 'GET'])
+@users_api.route('/users/login', methods = ['POST', 'GET'])
 def log_user():
     data = request.get_json()
 
