@@ -14,11 +14,16 @@ class Ejercicio(db.Model):
     __tablename__ = 'ejercicios'
     id = db.Column(db.Integer, primary_key = True, nullable = False)
     nombre = db.Column(db.String(50), nullable = False)
-    repeticiones = db.Column(db.Integer, nullable = False)
-    series = db.Column(db.Integer, nullable = False)
+    descripcion = db.Column(db.String(300), nullable = False)
+    dificultad = db.Column(db.String(20), nullable = False)
+    tipo = db.Column(db.String(20), nullable = False)
+    equipo = db.Column(db.String(50), nullable = False)
     musculo = db.Column(db.String(50), nullable = False)
-    icono = db.Column(db.String(200), nullable = False)
-    video_ejemplo = db.Column(db.String(200), nullable = False)
+    peso = db.Column(db.Integer, nullable = False)
+    series = db.Column(db.Integer, nullable = False)
+    repeticiones = db.Column(db.Integer, nullable = False)
+    duracion = db.Column(db.Integer, nullable = False)
+    foto = db.Column(db.String(200), nullable = False)
     def __repr__(self):
         return f'<Ejercicio {self.id}>'
 
@@ -44,11 +49,16 @@ def create_ejercicio():
 
     ejercicio = Ejercicio(
         nombre = data['nombre'],
-        repeticiones = data['repeticiones'],
-        series = data['series'],
+        descripcion = data['descripcion'],
+        dificultad = data['dificultad'],
+        tipo = data['tipo'],
+        equipo = data['equipo'],
         musculo = data['musculo'],
-        icono = data['icono'],
-        video_ejemplo = data['video_ejemplo']
+        peso = data['peso'],
+        series = data['series'],
+        repeticiones = data['repeticiones'],
+        duracion = data['duracion'],
+        foto = data['foto'],
     )
 
     db.session.add(ejercicio)
@@ -63,11 +73,16 @@ def get_ejercicios():
 
     return jsonify([{'id' : ejercicio.id,
                      'nombre' : ejercicio.nombre,
-                     'repeticiones' : ejercicio.repeticiones,
-                     'series' : ejercicio.series,
+                     'descripcion' : ejercicio.descripcion,
+                     'dificultad' : ejercicio.dificultad,
+                     'tipo' : ejercicio.tipo,
+                     'equipo' : ejercicio.equipo,
                      'musculo' : ejercicio.musculo,
-                     'icono' : ejercicio.icono,
-                     'video_ejemplo' : ejercicio.video_ejemplo
+                     'peso' : ejercicio.peso,
+                     'series' : ejercicio.series,
+                     'repeticiones' : ejercicio.repeticiones,
+                     'duracion' : ejercicio.duracion,
+                     'foto' : ejercicio.foto
                      } for ejercicio in ejercicios]), 200
 
 # READ (each) API Endpoint
@@ -80,11 +95,16 @@ def get_ejercicio(id):
     
     return jsonify({'id' : ejercicio.id,
                      'nombre' : ejercicio.nombre,
-                     'repeticiones' : ejercicio.repeticiones,
-                     'series' : ejercicio.series,
+                     'descripcion' : ejercicio.descripcion,
+                     'dificultad' : ejercicio.dificultad,
+                     'tipo' : ejercicio.tipo,
+                     'equipo' : ejercicio.equipo,
                      'musculo' : ejercicio.musculo,
-                     'icono' : ejercicio.icono,
-                     'video_ejemplo' : ejercicio.video_ejemplo}), 200
+                     'peso' : ejercicio.peso,
+                     'series' : ejercicio.series,
+                     'repeticiones' : ejercicio.repeticiones,
+                     'duracion' : ejercicio.duracion,
+                     'foto' : ejercicio.foto}), 200
 
 # UPDATE API Endpoint
 @ejercicios_api.route('/ejercicios/<int:id>', methods = ['PATCH'])
@@ -99,16 +119,26 @@ def patch_ejercicio(id):
 
     if 'nombre' in data:
         ejercicio.nombre = data['nombre']
+    if 'descripcion' in data:
+        ejercicio.descripcion = data['descripcion']
+    if 'dificultad' in data:
+        ejercicio.dificultad = data['dificultad']
+    if 'tipo' in data:
+        ejercicio.tipo = data['tipo']
+    if 'equipo' in data:
+        ejercicio.equipo = data['equipo']
+    if 'musculo' in data:
+        ejercicio.musculo = data['musculo']
+    if 'peso' in data:
+        ejercicio.peso = data['peso']
     if 'series' in data:
         ejercicio.series = data['series']
     if 'repeticiones' in data:
         ejercicio.repeticiones = data['repeticiones']
-    if 'musculo' in data:
-        ejercicio.musculo = data['musculo']
-    if 'icono' in data:
-        ejercicio.icono = data['icono']
-    if 'video_ejemplo' in data:
-        ejercicio.video_ejemplo = data['video_ejemplo']
+    if 'duracion' in data:
+        ejercicio.duracion = data['duracion']
+    if 'foto' in data:
+        ejercicio.foto = data['foto']
 
     db.session.commit()
 
