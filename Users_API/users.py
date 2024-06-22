@@ -65,7 +65,7 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'message: User added successfully'}), 200
+    return jsonify({'message': 'User added successfully'}), 200
 
 # Login User
 @users_api.route('/users/login', methods = ['POST', 'GET'])
