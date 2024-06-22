@@ -14,7 +14,7 @@ CORS(users_api)
 class User(db.Model):
     __tablename__ = 'users'
     email = db.Column(db.String(100), primary_key = True, nullable = False)
-    password = db.Column(db.String(100), nullable = False)
+    password = db.Column(db.String(300), nullable = False)
     nombre = db.Column(db.String(100), nullable = False)
     altura = db.Column(db.Numeric(4, 2), nullable = False)
     peso = db.Column(db.Numeric(4, 1), nullable = False)
