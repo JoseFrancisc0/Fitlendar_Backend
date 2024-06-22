@@ -18,7 +18,7 @@ class User(db.Model):
     nombre = db.Column(db.String(100), nullable = False)
     altura = db.Column(db.Numeric(4, 2), nullable = False)
     peso = db.Column(db.Numeric(4, 1), nullable = False)
-    foto = db.Column(db.String(200), nullable = False)
+    foto = db.Column(db.String(255), nullable = False)
     def __repr__(self):
         return f'<User {self.email}>'
 
