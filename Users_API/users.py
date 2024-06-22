@@ -58,7 +58,7 @@ def register_user():
     if User.query.filter_by(email=email).first():
         return jsonify({'error': 'Email already registered'}), 400
     
-    hashed_password = generate_password_hash(password, method='sha256')
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
     new_user = User(email=email, password=hashed_password, nombre=nombre, altura=altura, peso=peso, foto=foto)
 
