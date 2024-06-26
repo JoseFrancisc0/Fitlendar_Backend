@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Instanciar SQLAlchemy
 users_api = Flask(__name__)
-users_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:YAazvWupayIfCP1GWeml@fl-database.clttsra2gi97.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
+users_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://masterdaster:bBnTFpTThOGwVJuu3Mbx@fitlendar-db.cjiqbpllrpor.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
 users_api.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(users_api)
 CORS(users_api)
@@ -113,13 +113,13 @@ def update_user_profile(email):
     if not data:
         return bad_request(400)
     
-    if 'nombre' in data:
+    if 'nombre' in data and data['nombre'].strip() != "":
         user.nombre = data['nombre']
-    if 'altura' in data:
+    if 'altura' in data and data['altura'].strip() != "":
         user.altura = data['altura']
-    if 'peso' in data:
+    if 'peso' in data and data['peso'].strip() != "":
         user.peso = data['peso']
-    if 'foto' in data:
+    if 'foto' in data and data['foto'].strip() != "":
         user.foto = data['foto']
 
     db.session.commit()
