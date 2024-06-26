@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 # Instanciar SQLAlchemy
 ejercicios_api = Flask(__name__)
-ejercicios_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://masterdaster:fzUfbTNzduUa2XaJi3rq@db-fitlendar.cjiqbpllrpor.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
+ejercicios_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:YAazvWupayIfCP1GWeml@fl-database.clttsra2gi97.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
 ejercicios_api.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(ejercicios_api)
 CORS(ejercicios_api)
