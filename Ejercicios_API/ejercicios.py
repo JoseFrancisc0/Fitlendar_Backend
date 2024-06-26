@@ -23,7 +23,7 @@ class Ejercicio(db.Model):
     series = db.Column(db.Integer, nullable = False)
     repeticiones = db.Column(db.Integer, nullable = False)
     duracion = db.Column(db.Integer, nullable = False)
-    foto = db.Column(db.String(200), nullable = False)
+    foto = db.Column(db.String(255), nullable = False)
     def __repr__(self):
         return f'<Ejercicio {self.id}>'
 
