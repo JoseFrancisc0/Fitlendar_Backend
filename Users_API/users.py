@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Instanciar SQLAlchemy
 users_api = Flask(__name__)
-users_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://masterdaster:fzUfbTNzduUa2XaJi3rq@db-fitlendar.cjiqbpllrpor.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
+users_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:YAazvWupayIfCP1GWeml@fl-database.clttsra2gi97.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
 users_api.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(users_api)
 CORS(users_api)
