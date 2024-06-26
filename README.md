@@ -1,6 +1,6 @@
 # Fitlendar_Backend
 
-## LOAD BALANCER: http://fitlendar-lb-1465450486.us-east-1.elb.amazonaws.com/
+## LOAD BALANCER: http://fitlendar-lb-1465450486.us-east-1.elb.amazonaws.com
 
 ## Roadmap
 
