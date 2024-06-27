@@ -115,9 +115,9 @@ def update_user_profile(email):
     
     if 'nombre' in data and data['nombre'].strip() != "":
         user.nombre = data['nombre']
-    if 'altura' in data and data['altura'] != 0:
+    if 'altura' in data and data['altura'] < 0.5:
         user.altura = data['altura']
-    if 'peso' in data and data['peso'] != 0:
+    if 'peso' in data and data['peso'] < 30:
         user.peso = data['peso']
     if 'foto' in data and data['foto'].strip() != "":
         user.foto = data['foto']
