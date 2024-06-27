@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Instanciar SQLAlchemy
 users_api = Flask(__name__)
-users_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://masterdaster:bBnTFpTThOGwVJuu3Mbx@fitlendar-db.cjiqbpllrpor.us-east-1.rds.amazonaws.com:5432/db-fitlendar"
+users_api.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:MdMtX9piRNif172H2jq4@database-fitlendar.cjiqbpllrpor.us-east-1.rds.amazonaws.com:5432/postgres"
 users_api.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(users_api)
 CORS(users_api)
@@ -115,9 +115,9 @@ def update_user_profile(email):
     
     if 'nombre' in data and data['nombre'].strip() != "":
         user.nombre = data['nombre']
-    if 'altura' in data and data['altura'].strip() != "":
+    if 'altura' in data and data['altura'] != 0:
         user.altura = data['altura']
-    if 'peso' in data and data['peso'].strip() != "":
+    if 'peso' in data and data['peso'] != 0:
         user.peso = data['peso']
     if 'foto' in data and data['foto'].strip() != "":
         user.foto = data['foto']
