@@ -9,3 +9,7 @@ services:
     image: josefrancisc0/fitlendar_users-api
     ports:
       - 8002:8002
+  horarios-api:
+    image: josefrancisc0/fitlendar_horarios-api
+    ports:
+      - 8003:8003
