@@ -104,6 +104,8 @@ def update_horario(user_email, horario):
     if 'completed' in data:
         h.completed = data['completed']
 
+    db.session.commit()
+    
     return jsonify({'message': 'Horario updated successfully'}), 200
 
 # Delete Horario
