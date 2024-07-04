@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from datetime import datetime
 
 # Instanciar SQLAlchemy
 horarios_api = Flask(__name__)
@@ -67,10 +68,12 @@ def create_horario():
     if data is None:
         return bad_request(400)
 
+    horario_datetime = datetime.strptime(data['horario'], '%Y-%m-%dT%H:%M:%S')
+    
     horario = Horario(
         user_email = data['user_email'],
         ejercicio_id = data['ejercicio_id'],
-        horario = data['horario'],
+        horario = horario_datetime,
         completed = data['completed']
     )
 
