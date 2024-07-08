@@ -120,32 +120,37 @@ def get_horarios(user_email):
                      } for horario in horarios]), 200
 
 # Update Horario
-@horarios_api.route('/horarios/<user_email>/<horario>', methods=['PATCH'])
+@horarios_api.route('/horarios/<user_email>', methods=['PATCH'])
 def update_horario(user_email, horario):
-    h = Horario.query.filter_by(user_email=user_email, horario=horario).first()
-    if h is None:
-        return not_found(404)
-    
+    # Json payload
     data = request.get_json()
     if data is None:
         return bad_request(400)
+    if 'fecha' not in data['fecha'] or 'inicio' not in data['inicio']:
+        return bad_request(400)
 
-    if 'completed' in data:
-        h.completed = data['completed']
+    fecha = datetime.strptime(data['fecha'], '%Y-%m-%d').date()
+    inicio = datetime.strptime(data['inicio'], '%H:%M').time()
 
-        if data['completed'] == True:
-            ejercicio = Ejercicio.query.get(h.ejercicio_id)
-            if ejercicio is None:
-                return not_found(404)
+    # Search horario
+    h = Horario.query.filter_by(user_email=user_email, fecha=fecha, inicio=inicio).first()
+    if h is None:
+        return not_found(404)
 
-            user = User.query.get(h.user_email)
-            if user is None:
-                return not_found(404)
-            user.calorias_quemadas += ejercicio.calorias
+    h.completed = True # Flag completed
 
-            check_racha = Horario.query.filter_by(user_email=h.user_email, fecha=h.fecha).first()
-            if check_racha is None:
-                user.racha += 1
+    ejercicio = Ejercicio.query.get(h.ejercicio_id)
+    if ejercicio is None:
+        return not_found(404)
+
+    user = User.query.get(h.user_email)
+    if user is None:
+        return not_found(404)
+    user.calorias_quemadas += ejercicio.calorias # Update calorias
+
+    check_racha = Horario.query.filter_by(user_email=h.user_email, fecha=h.fecha).first()
+    if check_racha is None:
+        user.racha += 1 # Update racha
                 
     db.session.commit()
     
