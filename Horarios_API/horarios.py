@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Instanciar SQLAlchemy
 horarios_api = Flask(__name__)
@@ -48,7 +48,9 @@ class Horario(db.Model):
     __tablename__ = 'horarios'
     user_email = db.Column(db.String(100), db.ForeignKey('users.email'), primary_key=True, nullable=False)
     ejercicio_id = db.Column(db.Integer, db.ForeignKey('ejercicios.id'), nullable=False)
-    horario = db.Column(db.DateTime, primary_key=True, nullable=False)
+    fecha = db.Column(db.Date, primary_key=True, nullable=False)
+    inicio = db.Column(db.Time, primary_key=True, nullable=False)
+    fin = db.Column(db.Time, primary_key=True, nullable=False)
     completed = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
@@ -72,12 +74,30 @@ def create_horario():
     if data is None:
         return bad_request(400)
 
-    horario_datetime = datetime.strptime(data['horario'], '%Y-%m-%dT%H:%M:%S')
+    fecha = datetime.strptime(data['fecha'], '%Y-%m-%d').date()
+    inicio = datetime.strptime(data['inicio'], '%H:%M').time()
+
+    ejercicio = Ejercicio.query.get(data['ejercicio_id'])
+    if ejercicio is None:
+        return not_fount(404)
+    
+    h, m = divmod(ejercicio.duracion, 60)
+    f_h = inicio.hour + h
+    f_m = inicio.minute + m
+    
+    if f_m > 60:
+        f_h += 1
+        f_m %= 60
+        
+    f_h %= 24
+    fin = time(hour=f_h, minute=f_m)
     
     horario = Horario(
         user_email = data['user_email'],
         ejercicio_id = data['ejercicio_id'],
-        horario = horario_datetime,
+        fecha = fecha,
+        inicio = inicio,
+        fin = fin,
         completed = data['completed']
     )
 
@@ -93,7 +113,9 @@ def get_horarios(user_email):
 
     return jsonify([{'user_email' : horario.user_email,
                      'ejercicio_id' : horario.ejercicio_id,
-                     'horario' : horario.horario,
+                     'fecha' : horario.fecha,
+                     'inicio' : horario.inicio,
+                     'fin' : horario.fin,
                      'completed' : horario.completed
                      } for horario in horarios]), 200
 
@@ -119,9 +141,12 @@ def update_horario(user_email, horario):
             user = User.query.get(h.user_email)
             if user is None:
                 return not_found(404)
-
             user.calorias_quemadas += ejercicio.calorias
 
+            check_racha = Horario.query.filter_by(user_email=h.user_email, fecha=h.fecha).first()
+            if check_racha is None:
+                user.racha += 1
+                
     db.session.commit()
     
     return jsonify({'message': 'Horario updated successfully'}), 200
