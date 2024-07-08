@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 # Instanciar SQLAlchemy
 horarios_api = Flask(__name__)
@@ -133,7 +133,7 @@ def update_horario(user_email, horario):
     if 'completed' in data:
         h.completed = data['completed']
 
-        if data['completed'] = True:
+        if data['completed'] == True:
             ejercicio = Ejercicio.query.get(h.ejercicio_id)
             if ejercicio is None:
                 return not_found(404)
