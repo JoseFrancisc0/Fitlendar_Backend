@@ -57,16 +57,13 @@ def register_user():
     altura = data['altura']
     peso = data['peso']
     foto = data['foto']
-    racha = data['racha']
-    calorias_quemadas = data['calorias_quemadas']
-    logueado = data['logueado']
 
     if User.query.filter_by(email=email).first():
         return jsonify({'error': 'Email already registered'}), 400
     
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-    new_user = User(email=email, password=hashed_password, nombre=nombre, altura=altura, peso=peso, foto=foto, racha=racha, calorias_quemadas=calorias_quemandas, logueado=logueado)
+    new_user = User(email=email, password=hashed_password, nombre=nombre, altura=altura, peso=peso, foto=foto, racha=0, calorias_quemadas=0, logueado=False)
 
     db.session.add(new_user)
     db.session.commit()
