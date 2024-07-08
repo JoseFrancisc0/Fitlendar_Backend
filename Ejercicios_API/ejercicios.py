@@ -58,7 +58,7 @@ def create_ejercicio():
         peso = data['peso'],
         series = data['series'],
         repeticiones = data['repeticiones'],
-        calorias = data['calorias']
+        calorias = data['calorias'],
         duracion = data['duracion'],
         foto = data['foto'],
     )
