@@ -91,6 +91,9 @@ def log_user():
     
     if not check_password_hash(user.password, password):
         return jsonify({'error': 'Incorrect password'}), 401
+
+    user.logueado = True
+    db.session.commit()
     
     return jsonify({'message': 'Logged in successfully'}), 200
 
