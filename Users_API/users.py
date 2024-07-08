@@ -92,7 +92,9 @@ def log_user():
     user.logueado = True
     db.session.commit()
     
-    return jsonify({'message': 'Logged in successfully'}), 200
+    return jsonify({
+        'message': 'Logged in successfully',
+        'logueado': user.logueado }), 200
 
 # List User
 @users_api.route('/users/<email>', methods = ['GET'])
