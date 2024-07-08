@@ -111,6 +111,17 @@ def update_horario(user_email, horario):
     if 'completed' in data:
         h.completed = data['completed']
 
+        if data['completed'] = True:
+            ejercicio = Ejercicio.query.get(h.ejercicio_id)
+            if ejercicio is None:
+                return not_found(404)
+
+            user = User.query.get(h.user_email)
+            if user is None:
+                return not_found(404)
+
+            user.calorias_quemadas += ejercicio.calorias
+
     db.session.commit()
     
     return jsonify({'message': 'Horario updated successfully'}), 200
