@@ -23,6 +23,7 @@ class Ejercicio(db.Model):
     peso = db.Column(db.Integer, nullable = False)
     series = db.Column(db.Integer, nullable = False)
     repeticiones = db.Column(db.Integer, nullable = False)
+    calorias = db.Column(db.Integer, nullable = False)
     duracion = db.Column(db.Integer, nullable = False)
     foto = db.Column(db.String(255), nullable = False)
     
