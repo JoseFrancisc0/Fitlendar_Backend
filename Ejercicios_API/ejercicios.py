@@ -22,6 +22,7 @@ class Ejercicio(db.Model):
     peso = db.Column(db.Integer, nullable = False)
     series = db.Column(db.Integer, nullable = False)
     repeticiones = db.Column(db.Integer, nullable = False)
+    calorias = db.Column(db.Integer, nullable = False)
     duracion = db.Column(db.Integer, nullable = False)
     foto = db.Column(db.String(255), nullable = False)
     def __repr__(self):
@@ -57,6 +58,7 @@ def create_ejercicio():
         peso = data['peso'],
         series = data['series'],
         repeticiones = data['repeticiones'],
+        calorias = data['calorias']
         duracion = data['duracion'],
         foto = data['foto'],
     )
@@ -81,6 +83,7 @@ def get_ejercicios():
                      'peso' : ejercicio.peso,
                      'series' : ejercicio.series,
                      'repeticiones' : ejercicio.repeticiones,
+                     'calorias' : ejercicio.calorias,
                      'duracion' : ejercicio.duracion,
                      'foto' : ejercicio.foto
                      } for ejercicio in ejercicios]), 200
@@ -103,6 +106,7 @@ def get_ejercicio(id):
                      'peso' : ejercicio.peso,
                      'series' : ejercicio.series,
                      'repeticiones' : ejercicio.repeticiones,
+                     'calorias' : ejercicio.calorias,
                      'duracion' : ejercicio.duracion,
                      'foto' : ejercicio.foto}), 200
 
@@ -135,6 +139,8 @@ def patch_ejercicio(id):
         ejercicio.series = data['series']
     if 'repeticiones' in data:
         ejercicio.repeticiones = data['repeticiones']
+    if 'calorias' in data:
+        ejercicio.calorias = data['calorias']
     if 'duracion' in data:
         ejercicio.duracion = data['duracion']
     if 'foto' in data:
