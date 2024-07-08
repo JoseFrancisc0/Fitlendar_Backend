@@ -113,9 +113,9 @@ def get_horarios(user_email):
 
     return jsonify([{'user_email' : horario.user_email,
                      'ejercicio_id' : horario.ejercicio_id,
-                     'fecha' : horario.fecha.date().isoformat(),
-                     'inicio' : horario.inicio.time().isoformat(),
-                     'fin' : horario.fin.time().isoformat(),
+                     'fecha' : horario.fecha.isoformat(),
+                     'inicio' : horario.inicio.isoformat(),
+                     'fin' : horario.fin.isoformat(),
                      'completed' : horario.completed
                      } for horario in horarios]), 200
 
