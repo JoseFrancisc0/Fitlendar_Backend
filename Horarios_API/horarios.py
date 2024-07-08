@@ -157,9 +157,9 @@ def update_horario(user_email):
     return jsonify({'message': 'Horario updated successfully'}), 200
 
 # Delete Horario
-@horarios_api.route('/horarios/<user_email>, methods=['DELETE'])
-def delete_horario(user_email):
-    h = Horario.query.filter_by(user_email=user_email, horario=horario).first()
+@horarios_api.route('/horarios/<user_email>/<fecha>/<inicio>', methods=['DELETE'])
+def delete_horario(user_email, fecha, inicio):        
+    h = Horario.query.filter_by(user_email=user_email, fecha=fecha, inicio=inicio).first()
     if h is None:
         return not_found(404)
     
