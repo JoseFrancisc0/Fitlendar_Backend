@@ -19,6 +19,9 @@ class User(db.Model):
     altura = db.Column(db.Numeric(4, 2), nullable = False)
     peso = db.Column(db.Numeric(4, 1), nullable = False)
     foto = db.Column(db.String(255), nullable = False)
+    racha = db.Column(db.Integer, nullable = False)
+    calorias_quemadas = db.Column(db.Integer, nullable = False)
+    logueado = db.Column(db.Boolean, nullable = False)
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -54,13 +57,16 @@ def register_user():
     altura = data['altura']
     peso = data['peso']
     foto = data['foto']
+    racha = data['racha']
+    calorias_quemadas = data['calorias_quemadas']
+    logueado = data['logueado']
 
     if User.query.filter_by(email=email).first():
         return jsonify({'error': 'Email already registered'}), 400
     
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-    new_user = User(email=email, password=hashed_password, nombre=nombre, altura=altura, peso=peso, foto=foto)
+    new_user = User(email=email, password=hashed_password, nombre=nombre, altura=altura, peso=peso, foto=foto, racha=racha, calorias_quemadas=calorias_quemandas, logueado=logueado)
 
     db.session.add(new_user)
     db.session.commit()
@@ -99,7 +105,9 @@ def get_user(email):
     return jsonify({'nombre': user.nombre,
                     'altura': user.altura,
                     'peso': user.peso,
-                    'foto': user.foto}), 200
+                    'foto': user.foto,
+                    'racha': user.racha,
+                    'calorias_quemadas': user.calorias_quemadas}), 200
 
 # Update User
 @users_api.route('/users/<email>', methods = ['PATCH'])
@@ -115,12 +123,18 @@ def update_user_profile(email):
     
     if 'nombre' in data and data['nombre'].strip() != "":
         user.nombre = data['nombre']
-    if 'altura' in data and data['altura'] < 0.5:
+    if 'altura' in data and data['altura'] > 0.5:
         user.altura = data['altura']
-    if 'peso' in data and data['peso'] < 30:
+    if 'peso' in data and data['peso'] > 30:
         user.peso = data['peso']
     if 'foto' in data and data['foto'].strip() != "":
         user.foto = data['foto']
+    if 'racha' in data and data['racha'] > 0:
+        user.racha = data['racha']
+    if 'calorias_quemadas' in data and data['calorias_quemadas'] > 0:
+        user.calorias_quemadas = data['calorias_quemadas']
+    if 'logueado' in data:
+        user.logueado = data['logueado']
 
     db.session.commit()
 
