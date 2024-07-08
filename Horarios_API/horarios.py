@@ -121,7 +121,7 @@ def get_horarios(user_email):
 
 # Update Horario
 @horarios_api.route('/horarios/<user_email>', methods=['PATCH'])
-def update_horario(user_email, horario):
+def update_horario(user_email):
     # Json payload
     data = request.get_json()
     if data is None:
@@ -157,8 +157,8 @@ def update_horario(user_email, horario):
     return jsonify({'message': 'Horario updated successfully'}), 200
 
 # Delete Horario
-@horarios_api.route('/horarios/<user_email>/<horario>', methods=['DELETE'])
-def delete_horario(user_email, horario):
+@horarios_api.route('/horarios/<user_email>, methods=['DELETE'])
+def delete_horario(user_email):
     h = Horario.query.filter_by(user_email=user_email, horario=horario).first()
     if h is None:
         return not_found(404)
