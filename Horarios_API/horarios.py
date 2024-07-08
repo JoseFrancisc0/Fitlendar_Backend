@@ -37,6 +37,9 @@ class User(db.Model):
     altura = db.Column(db.Numeric(4, 2), nullable = False)
     peso = db.Column(db.Numeric(4, 1), nullable = False)
     foto = db.Column(db.String(255), nullable = False)
+    racha = db.Column(db.Integer, nullable = False)
+    calorias_quemadas = db.Column(db.Integer, nullable = False)
+    logueado = db.Column(db.Boolean, nullable = False)
     def __repr__(self):
         return f'<User {self.email}>'
 
