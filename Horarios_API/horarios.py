@@ -148,8 +148,8 @@ def update_horario(user_email):
         return not_found(404)
     user.calorias_quemadas += ejercicio.calorias # Update calorias
 
-    check_racha = Horario.query.filter_by(user_email=h.user_email, fecha=h.fecha).first()
-    if check_racha is None:
+    check_racha = Horario.query.filter_by(user_email=h.user_email, fecha=h.fecha).count()
+    if check_racha == 1:
         user.racha += 1 # Update racha
                 
     db.session.commit()
