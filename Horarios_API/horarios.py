@@ -126,7 +126,7 @@ def update_horario(user_email):
     data = request.get_json()
     if data is None:
         return bad_request(400)
-    if 'fecha' not in data['fecha'] or 'inicio' not in data['inicio']:
+    if 'fecha' not in data or 'inicio' not in data:
         return bad_request(400)
 
     fecha = datetime.strptime(data['fecha'], '%Y-%m-%d').date()
