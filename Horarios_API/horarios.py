@@ -130,7 +130,7 @@ def update_horario(user_email):
         return bad_request(400)
 
     fecha = datetime.strptime(data['fecha'], '%Y-%m-%d').date()
-    inicio = datetime.strptime(data['inicio'], '%H:%M').time()
+    inicio = datetime.strptime(data['inicio'], '%H:%M:%S').time()
 
     # Search horario
     h = Horario.query.filter_by(user_email=user_email, fecha=fecha, inicio=inicio).first()
