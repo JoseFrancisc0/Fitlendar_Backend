@@ -21,5 +21,21 @@ CREATE TABLE ejercicios
 	series INT NOT NULL,
 	repeticiones INT NOT NULL,
 	duracion INT NOT NULL,
-	foto VARCHAR(255) NOT NULL
+	racha INT NOT NULL,
+	calorias_quemadas INT NOT NULL,
+	foto VARCHAR(255) NOT NULL,
+	logueado BOOLEAN NOT NULL
+);
+
+CREATE TABLE horarios
+(
+	user_email VARCHAR(100) NOT NULL,
+	ejercicio_id INT NOT NULL,
+	fecha DATE NOT NULL,
+	inicio TIME NOT NULL,
+	fin TIME NOT NULL,
+	completed BOOLEAN NOT NULL,
+	PRIMARY KEY (user_email, ejercicio_id, fecha, inicio, fin),
+	FOREIGN KEY (user_email) REFERENCES users(email),
+	FOREIGN KEY (ejercicio_id) REFERENCES ejercicios(id)
 );
