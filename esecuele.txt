@@ -1,4 +1,4 @@
-CREATE table users
+CREATE TABLE users
 (
 	email VARCHAR(100) PRIMARY KEY NOT NULL,
 	password VARCHAR(255) NOT NULL,
