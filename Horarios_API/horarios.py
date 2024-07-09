@@ -79,7 +79,7 @@ def create_horario():
 
     ejercicio = Ejercicio.query.get(data['ejercicio_id'])
     if ejercicio is None:
-        return not_fount(404)
+        return not_found(404)
     
     h, m = divmod(ejercicio.duracion, 60)
     f_h = inicio.hour + h
